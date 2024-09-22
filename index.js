@@ -5,7 +5,7 @@ const entree = document.querySelector(".haut-ecran p");
 const underscore = document.createElement("span");
 underscore.setAttribute("id", "underscore");
 underscore.textContent = "_";    
-const resultat = document.querySelector(".bas-ecran p");
+const result = document.querySelector(".bas-ecran p");
 const shift = document.querySelector(".btn-shift");
 let shiftClicked = false;
 const modeClr = document.querySelector(".btn-modeclr");
@@ -36,7 +36,7 @@ modeClr.addEventListener("click", activerModeClr);
 
 AC.addEventListener("click" , () => {
         if (shiftClicked) {                           //si shift est cliqué et que AC est cliqué juste après, alors éteindre la calcu
-            resultat.textContent = "";
+            result.textContent = "";
             entree.textContent = "";
             isON = false;           
         } else {
@@ -50,7 +50,7 @@ DEL.addEventListener("click", () => {
         entree.appendChild(underscore);
     })
 
-        //désactiver le fait que shift est cliqué (et alpha -prochainement-): 
+        //disable the shift mode (and alpha soon):
 allBouttons.forEach(bouton => {
     if (bouton !== shift) {          
         bouton.addEventListener("click", () => {
@@ -61,14 +61,14 @@ allBouttons.forEach(bouton => {
 
 allNumbers.forEach(bouton => {
     bouton.addEventListener("click", () => {
-        if(isON && !isError){                                           //si la calcu est allumé && que aucune erreur n'est affichée 
-            if(!isModeActived && !isClrActived) {                         //si le mode && le Clr n'est pas activé alors laissé les num fonctionner
+        if(isON && !isError){                                           //if the calculator is on and there is no error
+            if(!isModeActived && !isClrActived) {                         //if the mode and clr are not actived
                 if(entree.contains(underscore)){        
                     entree.removeChild(underscore);     
                 }
                 entree.textContent += bouton.dataset.display;
                 entree.appendChild(underscore);
-                 //si le modeClr est activé alors laissé marcher que les num 1 2 3 :
+                 //if the mode is enabled let only 1 2 and 3 works:
             } else if(isModeActived) { 
                 switch(mode) {
                     case 1 :
@@ -126,7 +126,7 @@ allNumbers.forEach(bouton => {
                         }
                         entree.innerHTML = "Mem clear";
                         entree.appendChild(underscore);
-                        resultat.innerHTML = "0.";  
+                        result.innerHTML = "0.";
                         memClear = true;                                         
                     break;
                     case "2" : 
@@ -134,7 +134,7 @@ allNumbers.forEach(bouton => {
                             entree.removeChild(underscore);
                         }
                         entree.innerHTML = "Mode clear";
-                        resultat.innerHTML = "0.";
+                        result.innerHTML = "0.";
                         modeclear = 1;                                                  
                     break;
                     case "3" :
@@ -142,7 +142,7 @@ allNumbers.forEach(bouton => {
                             entree.removeChild(underscore);
                         }
                         entree.innerHTML = "Reset All";
-                        resultat.innerHTML = "0.";
+                        result.innerHTML = "0.";
                         resetAll = 1;                               
                     break;
                 }
@@ -152,46 +152,47 @@ allNumbers.forEach(bouton => {
 })
 
 btnEgal.addEventListener("click", () => {
-    if(!isModeActived && !isClrActived) {                   //la fonction ne marche que si le mode et le clr sont désactivé 
+    if(!isModeActived && !isClrActived) {                   //the function works only if the mode and clr are disabled
         try {
             filtre = entree.textContent
                 .replace("×" ,"*")
                 .replace("÷", "/")
                 .replace("Ans", Ans)
-                .replace(/√(\d+)/g, "Math.sqrt($1)")                  //remplace les caractère de décoration en caractère informatique de calcul 
-                .replace(/cos (\d+)/g, "Math.cos($1)")
+                .replace(/√(\d+)/g, "Math.sqrt($1)")
+                .replace(/cos (\d+)/g, "Math.cos($1)")                  //replace decoration characters with computer characters
                 .replace(/sin (\d+)/g, "Math.sin($1)")
                 .replace(/tan (\d+)/g, "Math.tan($1)")
                 .replace(/log (\d+)/g, "Math.log($1)")
                 .slice(0, -1);
-            solution = eval(filtre);                                            //enlève le dernier caractère qui est le underscore_8
+            solution = eval(filtre);                                            //remove the last character (underscore)
         } catch (error) {
             console.log(error)
             entree.innerHTML = "<pre>    Syntax ERROR</pre>";
-            resultat.innerHTML = "";
+            result.innerHTML = "";
             isError = true;
             return;
         }   
-        if(solution !== Infinity && solution !== undefined) {       //si le résultat n'est pas une infinité (division par zéro) ou indéfini alors:
-            resultat.textContent = solution + ".";                      // à enlever sûrement le + "." parce que il faudra vérifiez si la solution est un nombre naturel ect...
+        if(solution !== Infinity && solution !== undefined) {       //if the solution is not infinite and not undefined:
+                                                                        //to remove the + "." because we will have to check if the solution is a natural number ect...
+            result.textContent = solution + ".";
             Ans = solution;
-        } else if(solution === Infinity) {                      //si la solution est infini afficher math error
+        } else if(solution === Infinity) {                      //if the solution is undefined we will display an error message
             entree.innerHTML = "<pre>     Math ERROR</pre>";
-            resultat.innerHTML = "";
+            result.innerHTML = "";
             isError = true;
-        } else {                                        //dans ce cas la solution est vide (indéfini) on laisse affiché le zéro
-            resultat.textContent = "0.";
+        } else {                                        //in this case the solution is empty, we display the 0 number
+            result.textContent = "0.";
         }
     } else if(memClear) {
         Ans = 0;
     } else if(modeclear === 1) {
-        resultat.textContent = "---------------------";
+        result.textContent = "---------------------";
         modeclear++;
     } else if(modeclear === 2) {
         resetMode();
         demarrage();
     } else if(resetAll === 1) {
-        resultat.textContent = "---------------------";
+        result.textContent = "---------------------";
         resetAll++;
     } else if(resetAll === 2) {
         Ans = 0;
@@ -203,8 +204,8 @@ btnEgal.addEventListener("click", () => {
 
 function demarrage() {
     entree.innerHTML = "";
-    resultat.innerHTML = "";    
-    resultat.textContent = "0.";
+    result.innerHTML = "";
+    result.textContent = "0.";
     entree.appendChild(underscore);
     isON = true;
     sortieModeClr();
@@ -224,10 +225,10 @@ function activerModeClr() {
     if (isON) {
         if (shiftClicked) {
             entree.innerHTML = "<pre>   Mcl  Mode  All</pre>";
-            resultat.innerHTML = "<pre>1    2    3    </pre>";
+            result.innerHTML = "<pre>1    2    3    </pre>";
             sortieModeClr();
             isClrActived = true;
-            // oublie pas ici de faire un "modeClr.removeEventListener" et dans la même fonction du code pour éviter de laiser les touches marhché
+            //don't forget to add a "modeClr.removeEventListener" here and in the same function of the code to avoid leaving the keys on
         } else {
             isClrActived = false
             isModeActived = true;
@@ -255,9 +256,9 @@ function activerModeClr() {
             }
         }
         if (mode < 4) {
-            resultat.innerHTML = "<pre>1    2    3    </pre>";
+            result.innerHTML = "<pre>1    2    3    </pre>";
         } else if (mode !== 5) {
-            resultat.innerHTML = "<pre>1                 </pre>";
+            result.innerHTML = "<pre>1                 </pre>";
         } else {
             mode = 0;
         }
