@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    border:0;
+}
+
+@font-face {
+    font-family: "Calculator";
+    src: url("fonts/calculator/Calculator.ttf") format("truetype");
+}
+ 
+#hello {
+    text-align: center;
+    font-size: 1.8em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.entourage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bouton:active, .btn-replay:active {
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.4);
+    transform: translateY(3px);
+    transition: .2s;
+}
+
+.calculatrice {
+    width: 300px; 
+    border-radius: 10px;
+    background-color: rgb(13, 178, 255);
+    padding: 15px;
+    margin: auto;
+    box-shadow: 10px 11px 10px 0px rgba(0,0,0,0.4);
+}
+
+.calculatrice ::selection {
+    background-color: transparent;
+}
+
+.btn-replay {
+    height: 90px;
+    border-radius: 50%;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    display: grid;
+    grid-template-columns: 23px 23px 23px;
+    grid-template-rows: 25px 25px 25px;
+    background-color: white;
+    justify-content: center;
+    align-content: center;
+    gap: 5px 8px;
+    box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.4);
+}
+
+.bouton-replay {
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn-replay-haut {
+    grid-column-start: 2;
+}
+
+.btn-replay-gauche {
+    grid-row-start: 2;
+}
+
+.btn-replay-droite {
+    grid-row-start: 2;
+    grid-column-start: 3;
+}
+
+.btn-replay-bas {
+    grid-row-start: 3;
+    grid-column-start: 2;
+}
+
+.replay-replay {
+    grid-row-start: 2;
+    grid-column-start: 2;
+    position: relative;
+    right: 11px;
+    top: 5px;
+    font-size: 0.75em;
+    cursor: default;
+}
+
+.hautCalcu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    color:white;
+    font-size: 1.3em;
+}
+
+.AutourEcran {  
+    height: 100px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.ecran {
+    width: 270px;
+    height: 80px;
+    margin: auto;
+    border-radius: 3px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.haut-ecran {
+    height: 50%;
+    padding-left: 10px;
+    font-size: 1.7em;
+    padding-top: 5px;
+}
+
+#underscore {
+    animation: blink 1s step-end infinite; /* l'animation dure 1 seconde, se répète indéfiniment et utilise une transition linéaire */   
+}
+
+.bas-ecran {
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 2.4em;
+    font-family: Calculator , sans-serif;
+}
+
+.bas-ecran pre {
+    font-family: Calculator , sans-serif;
+}
+
+.aff-puissance {
+    width: 9%;
+    height: 100%;
+    font-size: 0.5em;
+    margin-left: 5px;
+}
+
+.bouton {
+    box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+
+.boutons-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 30px;
+    gap: 10px;
+}
+
+.btn-shift {
+    border-radius: 18% 82% 15% 85% / 33% 67% 32% 68%;
+    color: greenyellow;
+}
+
+.btn-shift-text {
+    position: relative;
+    transform: rotate(17deg);
+    bottom: 18px;
+    left: 6px;
+    font-size: 0.8em;
+}
+
+.btn-alpha {
+    border-radius: 18% 82% 15% 85% / 33% 67% 32% 68%;
+    margin-top: 10px;
+    color: white;
+}
+
+.btn-alpha-text {
+    position: relative;
+    transform: rotate(13deg);
+    bottom: 15px;
+    left: 6px;
+    font-size: 0.8em;
+}
+
+.btn-modeclr {
+    border-radius: 82% 18% 85% 15% / 67% 32% 68% 33% ;
+    margin-top: 10px;
+}
+
+.mode {
+    position: relative;
+    transform: rotate(-25deg);
+    bottom: 8px;
+    right: 13px;
+    font-size: 0.7em;
+    color: white;
+}
+
+.clr {
+    position: relative;
+    transform: rotate(5deg);
+    bottom: 23px;
+    left: 15px;
+    font-size: 0.8em;
+    color: greenyellow;
+}
+
+.btn-on {
+    border-radius: 82% 18% 85% 15% / 67% 32% 68% 33% ;
+    color: white;
+}
+
+.on {
+    position: relative;
+    transform: rotate(-20deg);
+    bottom: 15px;
+    right: 12px;
+    font-size: 0.7em;
+}
+
+/* fini les embrouille (bon le début et raté un peu)*/
+
+.boutons-2 {
+    padding-top: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 25px 25px 25px 25px;
+    row-gap: 18px;
+    column-gap: 10px;
+}
+
+.btn-2 {
+    border-radius: 3px;
+    color: rgb(6, 130, 187);
+}
+
+.nCr {
+    grid-column-start: 1;
+    grid-column-start: 2;
+}
+
+.pol {
+    grid-column-start: 4;
+    grid-column-start: 5;
+}
+
+.small {
+    font-size: 1.3em;
+}
+
+.verySmall {
+    font-size: 2em;
+}
+
+.boutons-3 {
+    padding-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1Fr 1fr 1fr 1fr;
+    grid-template-rows: 35px 35px 35px 35px ;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-3 {
+    color: rgb(6, 130, 187);
+    border-radius: 7px;
+}
+
+.red {
+    color: rgb(255, 77, 45);
+}
+
+@keyframes blink {
+    50% {
+      opacity: 0; /* l'élément est invisible */
+    }   
+  }
